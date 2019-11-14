@@ -1,11 +1,16 @@
 import React from 'react'
+import { connect } from "react-redux";
+
 import Place from './Place'
-import { movecard } from './DB'
-import { ItemTypes } from '../Constants'
+import { movecard } from '../store/card/cardAction'
+import { ItemTypes } from '../constants'
 import { useDrop } from 'react-dnd'
 
-function TimeLinePlace({ x, children }) {
-	const black = x % 2 === 1
+const mapDispatchToProps = {
+	movecard
+}
+
+function TimeLinePlace({ x, children, movecard }) {
 	const [{ isOver }, drop] = useDrop({
 		accept: ItemTypes.Card,
 		canDrop: () => true,
@@ -24,7 +29,7 @@ function TimeLinePlace({ x, children }) {
 				height: '100%',
 			}}
 		>
-			<Place black={black}>{children}</Place>
+			<Place>{children}</Place>
 			{isOver && (
 				<div
 					style={{
@@ -43,4 +48,4 @@ function TimeLinePlace({ x, children }) {
   )
 }
 
-export default TimeLinePlace
+export default connect(null, mapDispatchToProps)(TimeLinePlace)

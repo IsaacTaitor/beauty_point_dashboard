@@ -1,44 +1,54 @@
 import React from 'react'
+import { connect } from "react-redux";
+
 import Card from './Card'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
-import TimeLineSquare from './TimeLinePlace'
+import TimeLinePlace from './TimeLinePlace'
+
+const mapStateToProps = (state: any) => ({
+  cardPosition: state.Position.cardPosition
+});
 
 function renderPlace(i, cardPosition) {
   return (
-    <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
-      <TimeLineSquare x={i}>
+    <div key={i} style={{ width: '75px', height: '86px'}}>
+      <TimeLinePlace x={i}>
         {renderPiece(i, cardPosition)}
-      </TimeLineSquare>
+      </TimeLinePlace>
     </div>
   )
 }
 
-function renderPiece(x, [cardX, cardY]) {
+function renderPiece(x, [cardX]) {
   if (x === cardX) {
-    return <Card />
+    return null// <Card />
   }
 }
 
-export default function TimeLine({ cardPosition }: any) {
-    const squares = []
-    for (let i = 0; i < 8; i++) {
-        squares.push(renderPlace(i, cardPosition))
-    }
 
-    return (
-       <div
-            style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexWrap: 'wrap',
-            }}
-        >
-             <DndProvider backend={HTML5Backend}>
-            {squares}
-            </DndProvider>
-        </div>
+function TimeLine(props) {
+  const squares = []
+  for (let i = 0; i < 18; i++) {
+    squares.push(renderPlace(i, props.cardPosition))
+  }
 
-    )
+  return (
+    <div
+      style={{
+        width: document.documentElement.clientWidth - 15,
+        height: document.documentElement.clientHeight - 20,
+        display: 'flex',
+        flexWrap: 'wrap',
+      }}
+    >
+      <DndProvider backend={HTML5Backend}>
+        {squares}
+        <Card cardPosition={props.cardPosition}/>
+      </DndProvider>
+    </div>
+
+  )
 }
+
+export default connect(mapStateToProps)(TimeLine)

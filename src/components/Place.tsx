@@ -5,9 +5,9 @@ export default function Place({ children }: any) {
   return (
     <div
       style={{
-        borderLeft: "1px double black",
-        width: '100%',
+        border: "1px dashed #D7D9DC",
         height: '100%',
+        width: '100%'
       }}
     >
       {children}

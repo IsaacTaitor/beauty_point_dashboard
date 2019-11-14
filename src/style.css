@@ -1,0 +1,17 @@
+.cell {
+    width: "75px"
+}
+
+.card {
+    font-size: 25;
+    font-weight: 'bold',;
+    background-color: "red";
+    cursor: 'move';
+    position: "absolute";
+    width: "143px";
+    height: "86px";
+    z-index: 100;
+    background: "#FFFFFF";
+    box-shadow: "0px 5px 15px rgba(56, 62, 68, 0.125057)";
+    border-radius: "5px";
+}
