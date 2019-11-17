@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { ItemTypes } from '../constants'
 import { useDrag } from 'react-dnd'
 
-const itemCount = 4;
+const itemWidth = 75;
 
-function Card({ cardPosition }) {
+export default function Card({ card }) {
   const [count, setCount] = useState(0);
   const [use, setUse] = useState(0);
 
   const [{ isDragging }, drag, drag2] = useDrag({
-    item: { type: ItemTypes.Card },
+    item: { type: card.id },
     end: () => {
       setUse(count)
     },
@@ -19,7 +18,7 @@ function Card({ cardPosition }) {
   })
   const onDragEnd = (e) => {
     let rect = e.target.getBoundingClientRect();
-    setCount(parseInt(String((e.clientX - rect.left) / 71.5)));
+    setCount(parseInt(String((e.clientX - rect.left) / itemWidth)));
   }
   return (
     !isDragging ?
@@ -33,9 +32,9 @@ function Card({ cardPosition }) {
           fontWeight: 'bold',
           cursor: 'move',
           position: "absolute",
-          width: `${71.5 * itemCount}px`,
+          width: `${card.duration * itemWidth}px`,
           height: "86px",
-          left: `${cardPosition[0] * 71.5 + 9 - 71.5 * use}px`,
+          left: `${card.begin * itemWidth + 9 - itemWidth * use}px`,
           zIndex: 100,
           background: "#FFFFFF",
           boxShadow: "0px 5px 15px rgba(56, 62, 68, 0.125057)",
@@ -45,5 +44,3 @@ function Card({ cardPosition }) {
       </div> : null
   )
 }
-
-export default (Card)

@@ -7,7 +7,7 @@ import { DndProvider } from 'react-dnd'
 import TimeLinePlace from './TimeLinePlace'
 
 const mapStateToProps = (state: any) => ({
-  cardPosition: state.Position.cardPosition
+  cardList: state.card
 });
 
 function renderPlace(i) {
@@ -35,7 +35,7 @@ function TimeLine(props) {
     >
       <DndProvider backend={HTML5Backend}>
         {squares}
-        <Card cardPosition={props.cardPosition}/>
+        {Object.values(props.cardList).map((card: any) => <Card key={card.id} card={card}/>)}
       </DndProvider>
     </div>
 
