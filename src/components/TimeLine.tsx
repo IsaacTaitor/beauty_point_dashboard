@@ -10,27 +10,18 @@ const mapStateToProps = (state: any) => ({
   cardPosition: state.Position.cardPosition
 });
 
-function renderPlace(i, cardPosition) {
+function renderPlace(i) {
   return (
     <div key={i} style={{ width: '75px', height: '86px'}}>
-      <TimeLinePlace x={i}>
-        {renderPiece(i, cardPosition)}
-      </TimeLinePlace>
+      <TimeLinePlace x={i}/>
     </div>
   )
 }
 
-function renderPiece(x, [cardX]) {
-  if (x === cardX) {
-    return null// <Card />
-  }
-}
-
-
 function TimeLine(props) {
   const squares = []
   for (let i = 0; i < 18; i++) {
-    squares.push(renderPlace(i, props.cardPosition))
+    squares.push(renderPlace(i))
   }
 
   return (
