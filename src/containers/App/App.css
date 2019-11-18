@@ -1,0 +1,28 @@
+.body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #F7F7F7;
+}
+
+.button {
+    width: 132px;
+    height: 36px;
+    box-shadow: 0px 1px 1px rgba(121, 139, 149, 0.440274);
+    border-radius: 3px;
+    background: #FFFFFF;
+    outline: none;
+    border-width: 0px
+}
+
+.buttonText {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #000000;
+}

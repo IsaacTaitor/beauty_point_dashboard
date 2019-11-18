@@ -1,0 +1,48 @@
+.header {
+    height: 60px;
+}
+
+.headerLogo {
+    position: absolute;
+    left: 1.8%;
+    top: 14px;
+}
+
+.headerSearch {
+    position: absolute;
+    left: 19.53%;
+    top: 12px;
+    width: 254px;
+    height: 36px;
+    background: #F6F6F6;
+    border-radius: 5px;
+}
+
+.headerSearchTitle {
+    position: absolute;
+    height: 16px;
+    left: 15.75%;
+    right: 67.32%;
+    top: calc(50% - 16px/2);
+
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #000000;
+}
+
+.headerMore {
+    position: absolute;
+    left: 70.52%;
+    font-size: 36px;
+    color: #C1C1C1;
+}
+
+.headerAvatar {
+    position: absolute;
+    left: 95.87%;
+    top: 10px;
+}
