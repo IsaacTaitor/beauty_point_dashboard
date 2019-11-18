@@ -13,12 +13,12 @@ const mapDispatchToProps = {
 	movecard
 }
 
-function TimeLinePlace({ x, children, movecard, cardList }) {
+function TimeLinePlace({ x, count, movecard, cardList }: any) {
 	const [{ isOver }, drop] = useDrop({
 		accept: Object.values(cardList).map((card: any) => card.id),
 		canDrop: () => true,
 		drop: item => {
-			movecard(item.type, x)
+			movecard(item.type, x - count)
 		},
 		collect: monitor => ({
 			isOver: !!monitor.isOver(),
@@ -34,7 +34,7 @@ function TimeLinePlace({ x, children, movecard, cardList }) {
 				height: '100%',
 			}}
 		>
-			<Place>{children}</Place>
+			<Place></Place>
 			{isOver && (
 				<div
 					style={{

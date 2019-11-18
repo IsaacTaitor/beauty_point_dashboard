@@ -3,29 +3,21 @@ import { useDrag } from 'react-dnd'
 
 const itemWidth = 75;
 
-export default function Card({ card }) {
-  const [count, setCount] = useState(0);
-  const [use, setUse] = useState(0);
-
-  const [{ isDragging }, drag, drag2] = useDrag({
+export default function Card({ card, setCount }: any) {
+  const [{ isDragging }, drag] = useDrag({
     item: { type: card.id },
-    end: () => {
-      setUse(count)
-    },
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
     }),
   })
-  const onDragEnd = (e) => {
-    let rect = e.target.getBoundingClientRect();
-    setCount(parseInt(String((e.clientX - rect.left) / itemWidth)));
+  const onMouseDown = (e: any) => {
+    setCount(parseInt(String((e.clientX - e.target.getBoundingClientRect().left) / itemWidth)));
   }
-  console.log(card)
   return (
     !isDragging ?
       <div
         onMouseDown={
-          onDragEnd
+          onMouseDown
         }
         ref={drag}
         style={{
@@ -33,14 +25,15 @@ export default function Card({ card }) {
           position: "absolute",
           width: `${(card.duration * itemWidth) - 2}px`,
           height: "86px",
-          left: `${card.begin * itemWidth + 9 - itemWidth * use}px`,
+          left: `${card.begin * itemWidth + 9}px`,
           background: "#FFFFFF",
           boxShadow: "0px 5px 15px rgba(56, 62, 68, 0.125057)",
           borderRadius: "5px",
           borderBottom: `3px solid ${card.color}`
         }}
       >
-        <div style={{
+        <div
+        style={{
           position: "absolute",
           height: "16px",
           left: "6.98%",
@@ -51,7 +44,8 @@ export default function Card({ card }) {
           fontSize: "14px",
           lineHeight: "16px"
         }}>{card.title}</div>
-        <div style={{
+        <div
+        style={{
           position: "absolute",
           height: "13px",
           left: "6.98%",
@@ -64,12 +58,14 @@ export default function Card({ card }) {
           mixBlendMode: "normal",
           opacity: "0.4"
         }}>{card.note}</div>
-        <div style={{
+        <div
+        style={{
           position: "absolute",
           left: "14px",
           top: "14px"
         }}>
-          <div style={{
+          <div
+          style={{
             position: "absolute",
             height: "13px",
             left: "39.53%",

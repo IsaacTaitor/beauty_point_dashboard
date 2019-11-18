@@ -1,7 +1,9 @@
+import { MOVE } from "./cardAction";
+
 interface IcardList {
     [id: string]: {
         begin: number; // 1 = 30 min
-        duration: number
+        duration: number;
         id: string;
         title: string;
         note: string;
@@ -10,7 +12,7 @@ interface IcardList {
 }
 
 const initialState: IcardList = {
-	"ag33g4": {
+    "ag33g4": {
         begin: 0,
         duration: 3,
         id: "ag33g4",
@@ -36,9 +38,9 @@ const initialState: IcardList = {
     },
 };
 
-export function card(state = initialState, action) {
-	switch (action.type) {
-        case "Move": {
+export function card(state = initialState, action: any) {
+    switch (action.type) {
+        case MOVE: {
             return {
                 ...state,
                 [action.payload.id]: {
@@ -47,7 +49,7 @@ export function card(state = initialState, action) {
                 }
             };
         };
-		default:
-			return state;
-	}
+        default:
+            return state;
+    }
 }

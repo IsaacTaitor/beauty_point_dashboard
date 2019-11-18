@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from "react-redux";
 
 import Card from './Card'
@@ -10,18 +10,20 @@ const mapStateToProps = (state: any) => ({
   cardList: state.card
 });
 
-function renderPlace(i) {
+function renderPlace(i: number, count: number) {
   return (
-    <div key={i} style={{ width: '75px', height: '86px'}}>
-      <TimeLinePlace x={i}/>
+    <div key={i} style={{ width: '75px', height: '86px' }}>
+      <TimeLinePlace x={i} count={count}/>
     </div>
   )
 }
 
-function TimeLine(props) {
+function TimeLine(props: any) {
+  const [count, setCount] = useState(0);
+
   const squares = []
   for (let i = 0; i < 18; i++) {
-    squares.push(renderPlace(i))
+    squares.push(renderPlace(i, count))
   }
 
   return (
@@ -35,7 +37,7 @@ function TimeLine(props) {
     >
       <DndProvider backend={HTML5Backend}>
         {squares}
-        {Object.values(props.cardList).map((card: any) => <Card key={card.id} card={card}/>)}
+        {Object.values(props.cardList).map((card: any) => <Card key={card.id} card={card} setCount={setCount} />)}
       </DndProvider>
     </div>
 
