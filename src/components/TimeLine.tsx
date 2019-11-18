@@ -13,26 +13,27 @@ const mapStateToProps = (state: any) => ({
 function renderPlace(i: number, count: number) {
   return (
     <div key={i} style={{ width: '75px', height: '86px' }}>
-      <TimeLinePlace x={i} count={count}/>
+      <TimeLinePlace x={i - count} />
     </div>
   )
 }
+
+const timePlaceLenght = 18;
 
 function TimeLine(props: any) {
   const [count, setCount] = useState(0);
 
   const squares = []
-  for (let i = 0; i < 18; i++) {
+  for (let i = 0; i < timePlaceLenght; i++) {
     squares.push(renderPlace(i, count))
   }
 
   return (
     <div
       style={{
-        width: document.documentElement.clientWidth - 15,
-        height: document.documentElement.clientHeight - 20,
+        width: `${75 * timePlaceLenght}px`,
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
       }}
     >
       <DndProvider backend={HTML5Backend}>

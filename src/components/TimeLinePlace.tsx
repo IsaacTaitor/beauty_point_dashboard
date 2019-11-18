@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux";
 
-import Place from './Place'
 import { movecard } from '../store/card/cardAction'
 import { useDrop } from 'react-dnd'
 
@@ -13,12 +12,17 @@ const mapDispatchToProps = {
 	movecard
 }
 
-function TimeLinePlace({ x, count, movecard, cardList }: any) {
+function TimeLinePlace({ x, movecard, cardList }: any) {
 	const [{ isOver }, drop] = useDrop({
 		accept: Object.values(cardList).map((card: any) => card.id),
-		canDrop: () => true,
+		canDrop: (item) => {
+			/* if (cardList[item.type].begin === x) {
+				return false
+			} */
+			return true
+		},
 		drop: item => {
-			movecard(item.type, x - count)
+			movecard(item.type, x)
 		},
 		collect: monitor => ({
 			isOver: !!monitor.isOver(),
@@ -30,11 +34,11 @@ function TimeLinePlace({ x, count, movecard, cardList }: any) {
 			ref={drop}
 			style={{
 				position: 'relative',
+				border: "1px dashed #D7D9DC",
 				width: '100%',
 				height: '100%',
 			}}
 		>
-			<Place></Place>
 			{isOver && (
 				<div
 					style={{
